@@ -1,7 +1,7 @@
 package es.iesteis;
 
-public class Licantropo extends Monstruito implements Transformable{
-    private Forma forma = Forma.HUMANO;;
+public class Licantropo extends Monstruito {
+    private Forma forma = Forma.NORMIE;;
     private FaseLunar faseLunar;
 
     public Licantropo(String nome) {
@@ -26,21 +26,6 @@ public class Licantropo extends Monstruito implements Transformable{
         this.faseLunar = faseLunar;
     }
 
-    @Override
-    public boolean poderTransformarse(){
-        if (faseLunar.equals(FaseLunar.CHEA)){
-            return true;
-        }return false;
-    }
-
-    @Override
-    public void transformasrse(){
-        if (poderTransformarse() && forma.equals(Forma.HUMANO)){
-            forma = Forma.LOBO;
-        } else{
-            forma = Forma.HUMANO;
-        }
-    }
 
     @Override
     public String toString() {

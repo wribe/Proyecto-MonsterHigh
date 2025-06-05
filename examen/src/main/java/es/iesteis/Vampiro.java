@@ -1,7 +1,7 @@
 package es.iesteis;
 
 public class Vampiro extends Monstruito implements Transformable{
-    private Forma forma = Forma.HUMANO;
+    private Forma forma = Forma.NORMIE;
     private int nivelEnerxia;
 
     public Vampiro(String nome, int nivelEnerxia) {
@@ -41,11 +41,11 @@ public class Vampiro extends Monstruito implements Transformable{
 
     @Override
     public void transformasrse(){
-        if (poderTransformarse() && forma.equals(Forma.HUMANO)){
-            forma = Forma.MORCEGO;
+        if (poderTransformarse() && forma.equals(Forma.NORMIE)){
+            forma = Forma.MURCIELAGO;
             nivelEnerxia -= 50;
         } else {
-            forma = Forma.HUMANO;
+            forma = Forma.NORMIE;
         }
     }
 

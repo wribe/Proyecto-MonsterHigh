@@ -41,7 +41,7 @@ public class Main {
 //            l.ouvear();
 
 
-            EscolaMonsterHigh monsterHigh = new EscolaMonsterHigh(LocalDate.of(2026, 06, 06));
+            EscuelaMonsterHigh monsterHigh = new EscuelaMonsterHigh(LocalDate.of(2026, 06, 06));
             System.out.println(monsterHigh);
             System.out.println(monsterHigh.diasAtaFinDeCurso());
             monsterHigh.matricularEstudante(m);
@@ -52,7 +52,7 @@ public class Main {
             monsterHigh.tranformarEstudantes();
             System.out.println(monsterHigh);
 
-            //        EscolaMonsterHigh monsterHigh2 = new EscolaMonsterHigh(LocalDate.of(2024, 06, 06));
+            //        EscuelaMonsterHigh monsterHigh2 = new EscuelaMonsterHigh(LocalDate.of(2024, 06, 06));
             //        System.out.println(monsterHigh2);
         } catch (NonLuaCheaException|EstudanteDuplicadoException|ValorDominioIncorrectoException|FindeCursoAnteriorException e) {
             e.getMessage();
