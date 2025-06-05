@@ -1,0 +1,52 @@
+package es.iesteis;
+
+public class Licantropo extends Monstruito implements Transformable{
+    private Forma forma = Forma.HUMANO;;
+    private FaseLunar faseLunar;
+
+    public Licantropo(String nome) {
+        super(nome);
+        this.faseLunar = FaseLunar.NOVA;
+    }
+
+    public void ouvear() throws NonLuaCheaException {
+        if (faseLunar.equals(FaseLunar.CHEA)){
+            System.out.println("AUUUUUUUUUU");
+        } else {
+            throw new NonLuaCheaException("Non hai lúa chea, non podes ouvear a ela");
+        }
+    }
+
+    @Override
+    public void presentarse(){
+        System.out.println("Ola, on un licántropo e chámome " + getNome());
+    }
+
+    public void setFaseLunar(FaseLunar faseLunar) {
+        this.faseLunar = faseLunar;
+    }
+
+    @Override
+    public boolean poderTransformarse(){
+        if (faseLunar.equals(FaseLunar.CHEA)){
+            return true;
+        }return false;
+    }
+
+    @Override
+    public void transformasrse(){
+        if (poderTransformarse() && forma.equals(Forma.HUMANO)){
+            forma = Forma.LOBO;
+        } else{
+            forma = Forma.HUMANO;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +"Licantropo{" +
+                "forma=" + forma +
+                ", faseLunar=" + faseLunar +
+                '}';
+    }
+}
