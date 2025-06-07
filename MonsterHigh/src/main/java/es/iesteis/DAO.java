@@ -17,19 +17,33 @@ public class DAO {
     }
 
     public HashMap<String, Integer> devolverEspecies() {
-        HashMap<String, String> Animales = new HashMap<>();
-        String sql = "SELECT especiePrincipal, subespecie FROM subespecies";
+        HashMap<String, String> animales = new HashMap<>();
+        String sql = "SELECT id, subespecie FROM subespecies where especiePrincipal like 'Animal'";
 
         try (Connection conexion = DriverManager.getConnection(url, usuario, password);
              PreparedStatement sentencia = conexion.prepareStatement(sql);
              ResultSet resultado = sentencia.executeQuery()) {
 
             while (resultado.next()) {
-                paises.put(resultado.getString("especiePrincipal"), resultado.getString("sub"));
+                animales.put(resultado.getInt("id"), resultado.getString("sub"));
             }
         } catch (SQLException e) {
             System.out.println("Error ao conectar á base de datos: " + e.getMessage());
         }
+        System.out.println(animales);
 
-        return paises;
+        HashMap<String, String> muertosVivientes = new HashMap<>();
+        String sql1 = "SELECT id, subespecie FROM subespecies where especiePrincipal like 'Muerto Viviente'";
+
+        try (Connection conexion = DriverManager.getConnection(url, usuario, password);
+             PreparedStatement sentencia = conexion.prepareStatement(sql1);
+             ResultSet resultado = sentencia.executeQuery()) {
+
+            while (resultado.next()) {
+                muertosVivientes.put(resultado.getInt("id"), resultado.getString("sub"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error ao conectar á base de datos: " + e.getMessage());
+        }
+        System.out.println(muertosVivientes);
     }
