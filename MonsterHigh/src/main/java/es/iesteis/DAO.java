@@ -134,4 +134,19 @@ public class DAO {
         }
         return false;
     }
+
+    public boolean insertarMonstriuto(String nombre, String especie, Forma forma) {
+        String query = "insert itno Monstruito(nombre, especie, forma) values (?, ?, ?)";
+
+        try (Connection connection = DriverManager.getConnection(url, usuario, password);
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setString(2, especie);
+            preparedStatement.setString(3, forma.name());
+            return preparedStatement.executeUpdate() < 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
