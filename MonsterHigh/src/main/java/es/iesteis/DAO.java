@@ -176,7 +176,7 @@ public class DAO {
             preparedStatement.setString(1, nombre);
             preparedStatement.setString(2, especie);
             preparedStatement.setString(3, forma.name());
-            return preparedStatement.executeUpdate() < 0;
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -184,13 +184,27 @@ public class DAO {
     }
 
     public boolean matricular(String nombre, LocalDate fecha) {
-        String query = "insert into Monstruito(alumno, matriculado, fecha_inicio) values (?, true, ?)";
+        String query = "insert into MonsterHigh(alumno, matriculado, fecha_inicio) values (?, true, ?)";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, password);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, nombre);
             preparedStatement.setDate(2, Date.valueOf(fecha));
-            return preparedStatement.executeUpdate() < 0;
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean graduar(String nombre) {
+        String query = "update MonsterHigh set fecha_fin = ? where alunmo like ?";
+
+        try (Connection connection = DriverManager.getConnection(url, usuario, password);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(2, nombre);
+            preparedStatement.setDate(1, Date.valueOf(LocalDate.now()));
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
