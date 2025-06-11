@@ -1,6 +1,9 @@
 package es.iesteis;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
 import java.util.HashMap;
 
 public class DAO {
@@ -122,13 +125,44 @@ public class DAO {
         return habilidades;
     }
 
-    public boolean eliminarMonstriuto(int id) {
-        String query = "DELETE FROM Monstruito  WHERE id = ?";
+    public HashMap<String, LocalDate> devolverMatriculados(){
+        HashMap<String, LocalDate> matriculados = new HashMap<>();
+        String sql = "select alumno, fecha_inicio, fecha_fin from monsterhigh ";
+
+        try (Connection conexion = DriverManager.getConnection(url, usuario, password);
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            ResultSet resultado = sentencia.executeQuery()) {
+            // Period p = Period.between(resultado.getDate("fecha_inicio").toLocalDate(), resultado.getDate("fecha_fin").toLocalDate());
+            while (resultado.next()) {
+                matriculados.put(resultado.getString("alumno"), resultado.getDate("fecha_incio").toLocalDate());
+            }
+        } catch (SQLException e) {
+            System.out.println("Error ao conectar á base de datos: " + e.getMessage());
+        }
+        System.out.println(matriculados);
+        return matriculados;
+    }
+
+    public boolean eliminarMonstriuto(String nombre) {
+        String query = "DELETE FROM Monstruito  WHERE nombre like ?";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, password);
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
-            return preparedStatement.executeUpdate() >= 0;
+            preparedStatement.setString(1, nombre);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean eliminarMonstriutoGrad(String nombre) {
+        String query = "DELETE FROM Monstruito  WHERE nombre like ?";
+
+        try (Connection connection = DriverManager.getConnection(url, usuario, password);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, nombre);
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
