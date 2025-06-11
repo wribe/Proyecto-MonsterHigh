@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="038facbc-6b5a-4c42-8e61-3a6102b7e2a5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/iesteis/Ghoul.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/iesteis/Momia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/iesteis/Zombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/es/iesteis/Vampiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/iesteis/Vampiro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/es/iesteis/Gorgona.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
