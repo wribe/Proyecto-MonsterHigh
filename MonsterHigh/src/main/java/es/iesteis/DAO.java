@@ -1,9 +1,8 @@
-package es.iesteis;
+       package es.iesteis;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Date;
 import java.util.HashMap;
 
 public class DAO {
@@ -156,8 +155,8 @@ public class DAO {
         return false;
     }
 
-    public boolean eliminarMonstriutoGrad(String nombre) {
-        String query = "DELETE FROM Monstruito  WHERE nombre like ?";
+    public boolean eliminarAlumno(String nombre) {
+        String query = "DELETE FROM MonsterHigh  WHERE alumno like ?";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, password);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -170,13 +169,27 @@ public class DAO {
     }
 
     public boolean insertarMonstriuto(String nombre, String especie, Forma forma) {
-        String query = "insert itno Monstruito(nombre, especie, forma) values (?, ?, ?)";
+        String query = "insert into Monstruito(nombre, especie, forma) values (?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, password);
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, nombre);
             preparedStatement.setString(2, especie);
             preparedStatement.setString(3, forma.name());
+            return preparedStatement.executeUpdate() < 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean matricular(String nombre, LocalDate fecha) {
+        String query = "insert into Monstruito(alumno, matriculado, fecha_inicio) values (?, true, ?)";
+
+        try (Connection connection = DriverManager.getConnection(url, usuario, password);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setDate(2, Date.valueOf(fecha));
             return preparedStatement.executeUpdate() < 0;
         } catch (SQLException e) {
             e.printStackTrace();
