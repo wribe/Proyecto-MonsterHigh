@@ -4,14 +4,12 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public abstract class Monstruito {
-    private  int codigo;
     private String nome;
     private HashMap<String, Integer> habilidadesEspeciais;
 
-    public Monstruito(String nome, int codigo) {
+    public Monstruito(String nome) {
         this.nome = nome;
         this.habilidadesEspeciais = new HashMap<>();
-        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -53,7 +51,6 @@ public abstract class Monstruito {
     @Override
     public String toString() {
         return "Estudiante " +
-                "codigo= '" + codigo + '\'' +
                 "nome='" + nome + '\'' +
                 ", habilidadesEspeciais=" + habilidadesEspeciais +
                 " TIPO: ";
