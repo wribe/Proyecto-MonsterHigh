@@ -29,7 +29,7 @@ public class Vampiro extends Monstruito implements Transformable{
                 nivelEnerxia += 10;
             }
         } else{
-            System.out.println("Yo no puedo bebedr sangre, me desmayo!! Pero lo que voy a hacer es tomarme un rico tomate:)");
+            System.out.println("Yo no puedo beber sangre, me desmayo!! Pero lo que voy a hacer es tomarme un rico tomate:)");
             if (nivelEnerxia == 100 || nivelEnerxia + 10 >= 100) {
                 nivelEnerxia = 100;
             } else {
