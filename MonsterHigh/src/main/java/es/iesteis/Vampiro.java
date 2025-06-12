@@ -6,8 +6,8 @@ public class Vampiro extends Monstruito implements Transformable{
     private Forma forma = Forma.NORMIE;
     private int nivelEnerxia;
 
-    public Vampiro(String nome, int nivelEnerxia) {
-        super(nome);
+    public Vampiro(String nome, int nivelEnerxia, Especies especie) {
+        super(nome, especie);
         if (enerxiaCorrecta(nivelEnerxia)) {
             this.nivelEnerxia = nivelEnerxia;
         } else {

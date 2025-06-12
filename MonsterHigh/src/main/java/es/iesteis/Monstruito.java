@@ -6,10 +6,12 @@ import java.util.Objects;
 public abstract class Monstruito {
     private String nome;
     private HashMap<String, Integer> habilidadesEspeciais;
+    private Especies especie;
 
-    public Monstruito(String nome) {
+    public Monstruito(String nome, Especies especie) {
         this.nome = nome;
         this.habilidadesEspeciais = new HashMap<>();
+        this.especie = especie;
     }
 
     public String getNome() {
@@ -34,7 +36,6 @@ public abstract class Monstruito {
         } else {
             habilidadesEspeciais.put(cadea, dominio);
         }
-
     }
 
     @Override

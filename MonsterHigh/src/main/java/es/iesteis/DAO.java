@@ -198,7 +198,7 @@ public class DAO {
     }
 
     public boolean graduar(String nombre) {
-        String query = "update MonsterHigh set fecha_fin = ? where alunmo like ?";
+        String query = "update MonsterHigh set fecha_fin = ?, matriculado = false where alunmo like ?";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, password);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {

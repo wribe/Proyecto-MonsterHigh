@@ -1,12 +1,10 @@
 package es.iesteis;
 
 public class Especies{
-    private int id;
-    private String especie;
+    private String especie; // aqui hablamos de las subespecies ya que especies principales hay solo tres
     private String descripcion;
 
-    public Especies(int id, String especie, String descripcion) {
-        this.id = id;
+    public Especies(String especie, String descripcion) {
         this.especie = especie;
         this.descripcion = descripcion;
     }
@@ -18,7 +16,6 @@ public class Especies{
     @java.lang.Override
     public java.lang.String toString() {
         return "Especies{" +
-                "id=" + id +
                 ", especie='" + especie + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
