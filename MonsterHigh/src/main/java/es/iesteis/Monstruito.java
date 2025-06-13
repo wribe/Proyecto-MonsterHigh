@@ -7,15 +7,53 @@ public abstract class Monstruito {
     private String nome;
     private HashMap<String, Integer> habilidadesEspeciais;
     private Especies especie;
+    private String colorPiel;
+    private String colorPelo;
+    private boolean colmillos;
+    private boolean gafas;
+    private boolean alas;
 
-    public Monstruito(String nome, Especies especie) {
+    public Monstruito(String nome, Especies especie, String colorPiel, String colorPelo, boolean colmillos, boolean gafas, boolean alas, HashMap<String, Integer> habilidadesEspeciais) {
         this.nome = nome;
-        this.habilidadesEspeciais = new HashMap<>();
         this.especie = especie;
+        this.colorPiel = colorPiel;
+        this.colorPelo = colorPelo;
+        this.colmillos = colmillos;
+        this.gafas = gafas;
+        this.alas = alas;
+        this.habilidadesEspeciais = habilidadesEspeciais;
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public HashMap<String, Integer> getHabilidadesEspeciais() {
+        return habilidadesEspeciais;
+    }
+
+    public Especies getEspecie() {
+        return especie;
+    }
+
+    public String getColorPiel() {
+        return colorPiel;
+    }
+
+    public String getColorPelo() {
+        return colorPelo;
+    }
+
+    public boolean isColmillos() {
+        return colmillos;
+    }
+
+    public boolean isGafas() {
+        return gafas;
+    }
+
+    public boolean isAlas() {
+        return alas;
     }
 
     public abstract void presentarse();
