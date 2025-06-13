@@ -6,13 +6,9 @@ public class Vampiro extends Monstruito implements Transformable{
     private Forma forma = Forma.NORMIE;
     private int nivelEnerxia;
 
-    public Vampiro(String nome, int nivelEnerxia, Especies especie) {
-        super(nome, especie);
-        if (enerxiaCorrecta(nivelEnerxia)) {
-            this.nivelEnerxia = nivelEnerxia;
-        } else {
-            this.nivelEnerxia = 0;
-        }
+    public Vampiro(String nome, Especies especie, String colorPiel, String colorPelo, boolean colmillos, boolean gafas, boolean alas, HashMap<String, Integer> habilidadesEspeciais, Forma forma) {
+        super(nome, especie, colorPiel, colorPelo, colmillos, gafas, alas, habilidadesEspeciais);
+        this.forma = forma;
     }
 
     private boolean enerxiaCorrecta(int nivelEnerxia){
@@ -38,11 +34,12 @@ public class Vampiro extends Monstruito implements Transformable{
         }
     }
 
-
     @Override
-    public void presentarse(){
-        System.out.println("Hola, son un vampiro, chámome " + getNome());
+    public void describir(){
+        System.out.println("Soy " + getNome() + ", un "+ getEspecie() + "de piel " + getColorPiel() + " y cabello " + getColorPelo() + " puedo convertirme en " + forma.name());
     }
+
+
 
     @Override
     public boolean poderTransformarse(){

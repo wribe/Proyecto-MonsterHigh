@@ -3,7 +3,7 @@ package es.iesteis;
 import java.util.HashMap;
 import java.util.Objects;
 
-public abstract class Monstruito {
+public abstract class Monstruito implements Jugable{
     private String nome;
     private HashMap<String, Integer> habilidadesEspeciais;
     private Especies especie;
@@ -56,7 +56,9 @@ public abstract class Monstruito {
         return alas;
     }
 
-    public abstract void presentarse();
+    public void presentarse(){
+        System.out.println("Hola! Soy el monstruito que vas a tener que adivinar jejeje");
+    }
 
     public void aprenderHabilidade(String cadea, int dominio) throws ValorDominioIncorrectoException {
         if (habilidadesEspeciais.size() != 0) {
