@@ -11,9 +11,9 @@ public class DAO {
     private String password;
 
     public DAO(String url, String usuario, String password) {
-        this.url = url;
-        this.usuario = usuario;
-        this.password = password;
+        this.url = url; // "jdbc:mysql://localhost:3306/monster_high"
+        this.usuario = usuario; // root
+        this.password = password; // casa: 122436 clase: Abc123.
     }
 
     public HashMap<String, HashMap<Integer, String>> devolverEspecies() {
@@ -80,6 +80,40 @@ public class DAO {
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
                 monstruitos.put(resultado.getInt("id"), resultado.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error ao conectar á base de datos: " + e.getMessage());
+        }
+        System.out.println(monstruitos);
+        return monstruitos;
+    }
+
+    public HashMap<String, Monstruito> devolverMonstruito(boolean colmillos, boolean gafas, boolean zombie){ // cambiarlo por string para decir si/no??
+        HashMap<String, Monstruito> monstruitos = new HashMap<>();
+        String sql = "SELECT * FROM personajes WHERE tiene_colmillos = ? AND usa_lentes = ? AND es_zombie = ?";
+
+        try (Connection conexion = DriverManager.getConnection(url, usuario, password);
+             PreparedStatement sentencia = conexion.prepareStatement(sql)){
+            sentencia.setBoolean(1, colmillos);
+            sentencia.setBoolean(2, gafas);
+            sentencia.setBoolean(3, zombie);
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                Monstruito monstruito = new Monstruito(
+                        resultado.getString("nombre"),
+                        resultado.getString("especie"),
+                        resultado.getString("color_piel"),
+                        resultado.getString("color_cabello"),
+                        resultado.getBoolean("tiene_colmillos"),
+                        resultado.getBoolean("usa_lentes"),
+                        resultado.getBoolean("tiene_ala")
+                ) {
+                    @Override
+                    public void describir() {
+
+                    }
+                };
+                monstruitos.put(resultado.getString("nombre"), monstruito);
             }
         } catch (SQLException e) {
             System.out.println("Error ao conectar á base de datos: " + e.getMessage());
@@ -210,4 +244,6 @@ public class DAO {
         }
         return false;
     }
+
+
 }

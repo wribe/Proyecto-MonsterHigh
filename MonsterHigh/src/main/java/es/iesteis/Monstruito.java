@@ -93,7 +93,6 @@ public abstract class Monstruito implements Jugable{
     public String toString() {
         return "Estudiante " +
                 "nome='" + nome + '\'' +
-                ", habilidadesEspeciais=" + habilidadesEspeciais +
-                " TIPO: ";
+                ", Especie=" + especie;
     }
 }

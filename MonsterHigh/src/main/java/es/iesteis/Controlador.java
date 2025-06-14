@@ -6,7 +6,7 @@ public class Controlador {
     private final DAO dao;
 
     public Controlador() {
-        this.dao = new DAO();
+//        this.dao = new DAO();
     }
 
     public ArrayList<Monstruito> buscarMonstruito(boolean colmillos, boolean gafas, boolean zonmbie)
