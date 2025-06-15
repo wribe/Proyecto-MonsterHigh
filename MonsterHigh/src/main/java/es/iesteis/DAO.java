@@ -140,9 +140,9 @@ public class DAO {
                 ColorPelo pelo = ColorPelo.valueOf(rs.getString("color_cabello").toUpperCase().replace(" ", "_"));
 
                 Monstruito m = switch (especie.toLowerCase()) {
-                    case "vampiro" -> new Vampiro(rs.getString("nombre"), rs.getObject("especie"), rs.getString("forma"), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
-                    case "zombie" -> new Zombie(rs.getString("nombre"), colorPiel, pelo,
+                    case "vampiro" -> new Vampiro(rs.getString("nombre"), rs.getObject("especie"), colorPiel, pelo,
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"), new HashMap<String, Integer>());
+                    case "zombie" -> new Zombie(rs.getString("nombre"), rs.getObject("especie"), colorPiel, pelo,
                             rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
                     default -> null;
                 };
@@ -155,7 +155,7 @@ public class DAO {
         }
 
         if (monstruitos.isEmpty()) {
-            throw new PersonajeNoEncontrado("❌ No se encontraron personajes con esas características.");
+            throw new PersonajeNoEncontrado("❌ No se encontraron personajes con esas características");
         }
 
         return monstruitos;
