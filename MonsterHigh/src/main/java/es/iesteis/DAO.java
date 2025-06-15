@@ -101,7 +101,7 @@ public class DAO {
             while (resultado.next()) {
                 Monstruito monstruito = new Monstruito(
                         resultado.getString("nombre"),
-                        resultado.getString("especie"),
+                        resultado.getObject("especie"),
                         resultado.getString("color_piel"),
                         resultado.getString("color_cabello"),
                         resultado.getBoolean("tiene_colmillos"),
