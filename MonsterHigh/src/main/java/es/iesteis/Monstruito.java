@@ -7,13 +7,13 @@ public abstract class Monstruito implements Jugable{
     private String nome;
     private HashMap<String, Integer> habilidadesEspeciais;
     private Especies especie;
-    private String colorPiel;
-    private String colorPelo;
+    private ColorPiel colorPiel;
+    private ColorPelo colorPelo;
     private boolean colmillos;
     private boolean gafas;
     private boolean alas;
 
-    public Monstruito(String nome, Especies especie, String colorPiel, String colorPelo, boolean colmillos, boolean gafas, boolean alas, HashMap<String, Integer> habilidadesEspeciais) {
+    public Monstruito(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas, HashMap<String, Integer> habilidadesEspeciais) {
         this.nome = nome;
         this.especie = especie;
         this.colorPiel = colorPiel;
@@ -36,11 +36,11 @@ public abstract class Monstruito implements Jugable{
         return especie;
     }
 
-    public String getColorPiel() {
+    public ColorPiel getColorPiel() {
         return colorPiel;
     }
 
-    public String getColorPelo() {
+    public ColorPelo getColorPelo() {
         return colorPelo;
     }
 

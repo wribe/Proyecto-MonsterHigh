@@ -3,6 +3,7 @@ package es.iesteis;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DAO {
@@ -11,8 +12,8 @@ public class DAO {
     private String password;
 
     public DAO(String url, String usuario, String password) {
-        this.url = url; // "jdbc:mysql://localhost:3306/monster_high"
-        this.usuario = usuario; // root
+        this.url =  "jdbc:mysql://localhost:3306/monster_high";
+        this.usuario =  "root";
         this.password = password; // casa: 122436 clase: Abc123.
     }
 
@@ -120,6 +121,45 @@ public class DAO {
         }
         System.out.println(monstruitos);
         return monstruitos;
+    }
+
+    public ArrayList<Monstruito> devolverMonstruitoFiltrado(boolean colmillos, boolean gafas, boolean zombie){
+        ArrayList<Monstruito> monstruitos = new ArrayList<>();
+        String sql = "SELECT * FROM personajes WHERE tiene_colmillos = ? AND usa_lentes = ? AND es_zombie = ?";
+        try (Connection conn = DriverManager.getConnection(url, usuario, password);
+             PreparedStatement prs = conn.prepareStatement(sql)) {
+
+            prs.setBoolean(1, colmillos);
+            prs.setBoolean(2, gafas);
+            prs.setBoolean(3, zombie);
+
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                String especie = rs.getString("especie");
+                ColorPiel colorPiel = ColorPiel.valueOf(rs.getString("color_piel").toUpperCase());
+                ColorPelo pelo = ColorPelo.valueOf(rs.getString("color_cabello").toUpperCase().replace(" ", "_"));
+
+                Monstruito m = switch (especie.toLowerCase()) {
+                    case "vampiro" -> new Vampiro(rs.getString("nombre"), rs.getObject("especie"), rs.getString("forma"), colorPiel, pelo,
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
+                    case "zombie" -> new Zombie(rs.getString("nombre"), colorPiel, pelo,
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
+                    default -> null;
+                };
+
+                if (m != null) monstruitos.add(m);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (monstruitos.isEmpty()) {
+            throw new PersonajeNoEncontrado("❌ No se encontraron personajes con esas características.");
+        }
+
+        return monstruitos;
+
     }
 
     public String devolverHabilidadesMonstruito(String nombre){
