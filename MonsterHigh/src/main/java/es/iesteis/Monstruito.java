@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public abstract class Monstruito implements Jugable{
     private String nome;
-    private HashMap<String, Integer> habilidadesEspeciais;
     private Especies especie;
     private ColorPiel colorPiel;
     private ColorPelo colorPelo;
@@ -13,7 +12,7 @@ public abstract class Monstruito implements Jugable{
     private boolean gafas;
     private boolean alas;
 
-    public Monstruito(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas, HashMap<String, Integer> habilidadesEspeciais) {
+    public Monstruito(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas) {
         this.nome = nome;
         this.especie = especie;
         this.colorPiel = colorPiel;
@@ -21,16 +20,12 @@ public abstract class Monstruito implements Jugable{
         this.colmillos = colmillos;
         this.gafas = gafas;
         this.alas = alas;
-        this.habilidadesEspeciais = habilidadesEspeciais;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public HashMap<String, Integer> getHabilidadesEspeciais() {
-        return habilidadesEspeciais;
-    }
 
     public Especies getEspecie() {
         return especie;
@@ -60,23 +55,23 @@ public abstract class Monstruito implements Jugable{
         System.out.println("Hola! Soy el monstruito que vas a tener que adivinar jejeje");
     }
 
-    public void aprenderHabilidade(String cadea, int dominio) throws ValorDominioIncorrectoException {
-        if (habilidadesEspeciais.size() != 0) {
-            for (String habilidade : habilidadesEspeciais.keySet()) {
-                if (habilidade.equals(cadea)) {
-                    if (dominio < 0 || dominio > 10) {
-                        throw new ValorDominioIncorrectoException("Dominio nan válido");
-                    } else {
-                        habilidadesEspeciais.replace(cadea, dominio);
-                    }
-                } else {
-                    habilidadesEspeciais.put(cadea, dominio);
-                }
-            }
-        } else {
-            habilidadesEspeciais.put(cadea, dominio);
-        }
-    }
+//    public void aprenderHabilidade(String cadea, int dominio) throws ValorDominioIncorrectoException {
+//        if (habilidadesEspeciais.size() != 0) {
+//            for (String habilidade : habilidadesEspeciais.keySet()) {
+//                if (habilidade.equals(cadea)) {
+//                    if (dominio < 0 || dominio > 10) {
+//                        throw new ValorDominioIncorrectoException("Dominio nan válido");
+//                    } else {
+//                        habilidadesEspeciais.replace(cadea, dominio);
+//                    }
+//                } else {
+//                    habilidadesEspeciais.put(cadea, dominio);
+//                }
+//            }
+//        } else {
+//            habilidadesEspeciais.put(cadea, dominio);
+//        }
+//    }
 
     @Override
     public boolean equals(Object o) {

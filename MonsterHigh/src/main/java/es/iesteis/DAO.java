@@ -91,7 +91,7 @@ public class DAO {
 
     public HashMap<String, Monstruito> devolverMonstruito(boolean colmillos, boolean gafas, boolean zombie){ // cambiarlo por string para decir si/no??
         HashMap<String, Monstruito> monstruitos = new HashMap<>();
-        String sql = "SELECT * FROM personajes WHERE tiene_colmillos = ? AND usa_lentes = ? AND es_zombie = ?";
+        String sql = "SELECT nombre, habilidadesEspeciais, especie, descipcion, color_piel, color_pelo, colmillos, gafas, alas FROM personajes WHERE tiene_colmillos = ? AND usa_lentes = ? AND es_zombie = ?";
 
         try (Connection conexion = DriverManager.getConnection(url, usuario, password);
              PreparedStatement sentencia = conexion.prepareStatement(sql)){
@@ -102,9 +102,9 @@ public class DAO {
             while (resultado.next()) {
                 Monstruito monstruito = new Monstruito(
                         resultado.getString("nombre"),
-                        resultado.getObject("especie"),
-                        resultado.getString("color_piel"),
-                        resultado.getString("color_cabello"),
+                        new Especies(resultado.getString("especie"), resultado.getString("decipcion")),
+                        ColorPiel.valueOf(resultado.getString("color_piel")),
+                        ColorPelo.valueOf(resultado.getString("color_cabello")),
                         resultado.getBoolean("tiene_colmillos"),
                         resultado.getBoolean("usa_lentes"),
                         resultado.getBoolean("tiene_ala")
@@ -140,9 +140,9 @@ public class DAO {
                 ColorPelo pelo = ColorPelo.valueOf(rs.getString("color_cabello").toUpperCase().replace(" ", "_"));
 
                 Monstruito m = switch (especie.toLowerCase()) {
-                    case "vampiro" -> new Vampiro(rs.getString("nombre"), rs.getObject("especie"), colorPiel, pelo,
+                    case "vampiro" -> new Vampiro(rs.getString("nombre"), new Especies(rs.getString("especie"),rs.getString("descipcion") ), colorPiel, pelo,
                             rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"), new HashMap<String, Integer>());
-                    case "zombie" -> new Zombie(rs.getString("nombre"), rs.getObject("especie"), colorPiel, pelo,
+                    case "zombie" -> new Zombie(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
                             rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
                     default -> null;
                 };

@@ -1,11 +1,9 @@
 package es.iesteis;
 
-import java.util.HashMap;
-
 public class Zombie extends Monstruito{
 
-    public Zombie(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas, HashMap<String, Integer> habilidadesEspeciais) {
-        super(nome, especie, colorPiel, colorPelo, colmillos, gafas, alas, habilidadesEspeciais);
+    public Zombie(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas) {
+        super(nome, especie, colorPiel, colorPelo, colmillos, gafas, alas);
     }
 
     @Override

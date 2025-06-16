@@ -6,8 +6,8 @@ public class Vampiro extends Monstruito implements Transformable{
     private Forma forma = Forma.NORMIE;
     private int nivelEnerxia;
 
-    public Vampiro(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas, HashMap<String, Integer> habilidadesEspeciais) {
-        super(nome, especie, colorPiel, colorPelo, colmillos, gafas, alas, habilidadesEspeciais);
+    public Vampiro(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas) {
+        super(nome, especie, colorPiel, colorPelo, colmillos, gafas, alas);
     }
 
     private boolean enerxiaCorrecta(int nivelEnerxia){

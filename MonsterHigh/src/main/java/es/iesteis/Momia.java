@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public class Momia extends Monstruito {
 
-    public Momia(String nome, Especies especie, String colorPiel, String colorPelo, boolean colmillos, boolean gafas, boolean alas, HashMap<String, Integer> habilidadesEspeciais) {
-        super(nome, especie, colorPiel, colorPelo, colmillos, gafas, alas, habilidadesEspeciais);
+    public Momia(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas) {
+        super(nome, especie, colorPiel, colorPelo, colmillos, gafas, alas);
     }
 
     @Override
