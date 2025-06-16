@@ -141,7 +141,7 @@ public class DAO {
 
                 Monstruito m = switch (especie.toLowerCase()) {
                     case "vampiro" -> new Vampiro(rs.getString("nombre"), new Especies(rs.getString("especie"),rs.getString("descipcion") ), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"), new HashMap<String, Integer>());
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
                     case "zombie" -> new Zombie(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
                             rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
                     default -> null;
