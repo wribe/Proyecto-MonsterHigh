@@ -40,14 +40,19 @@ public class Vista {
             }
 
             HashMap<String, Monstruito> monstruitos = controlador.buscarMonstruito(colmillos, gafas, zombie);
+            ArrayList<Monstruito> monstruitos1 = controlador.buscarMonstruitoFiltrado(colmillos, gafas, zombie);
 
             System.out.println("\nPersonajes posibles:");
             if (monstruitos.isEmpty()) {
                 System.out.println("No se encontraron coincidencias.");
             } else {
-                for (String nombre : monstruitos.keySet()) {
-                    System.out.println(monstruitos.get(nombre));
-                    monstruitos.get(nombre).describir();
+//                for (String nombre : monstruitos.keySet()) {
+//                    System.out.println(monstruitos.get(nombre));
+//                    monstruitos.get(nombre).describir();
+//                }
+                for (Monstruito monstruito : monstruitos1) {
+                    System.out.println(monstruito);
+                    monstruito.describir();
                 }
             }
         } catch (PersonajeNoEncontrado e) {

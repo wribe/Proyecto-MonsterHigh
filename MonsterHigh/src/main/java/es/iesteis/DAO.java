@@ -144,6 +144,16 @@ public class DAO {
                             rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
                     case "zombie" -> new Zombie(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
                             rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
+                    case "licantropo" -> new Licantropo(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
+                    case "monstruo" -> new Monstruo(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
+                    case "ghoul" -> new Ghoul(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
+                    case "momia" -> new Momia(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
+                    case "gorgona" -> new Gorgona(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
                     default -> null;
                 };
 
