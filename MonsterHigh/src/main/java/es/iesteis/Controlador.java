@@ -13,4 +13,8 @@ public class Controlador {
     public HashMap<String, Monstruito> buscarMonstruito(boolean colmillos, boolean gafas, boolean zonmbie){
         return dao.devolverMonstruito(colmillos, gafas, zonmbie);
     }
+
+    public ArrayList<Monstruito> buscarMonstruitoFiltrado(boolean colmillos, boolean gafas, boolean zonmbie){
+        return dao.devolverMonstruitoFiltrado(colmillos, gafas, zonmbie);
+    }
 }

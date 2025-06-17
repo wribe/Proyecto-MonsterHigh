@@ -1,10 +1,8 @@
 package es.iesteis;
 
-import java.util.HashMap;
+public class Licantropo extends Monstruito{
 
-public class Hominido extends Monstruito{
-
-    public Hominido(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas) {
+    public Licantropo(String nome, Especies especie, ColorPiel colorPiel, ColorPelo colorPelo, boolean colmillos, boolean gafas, boolean alas) {
         super(nome, especie, colorPiel, colorPelo, colmillos, gafas, alas);
     }
 

@@ -12,9 +12,9 @@ public class DAO {
     private String password;
 
     public DAO(String url, String usuario, String password) {
-        this.url =  "jdbc:mysql://localhost:3306/monster_high";
+        this.url =  "jdbc:mysql://localhost:3306/MonsterHigh";
         this.usuario =  "root";
-        this.password = password; // casa: 122436 clase: Abc123.
+        this.password = "122436"; //password; // casa: 122436 clase: Abc123.
     }
 
     public HashMap<String, HashMap<Integer, String>> devolverEspecies() {
