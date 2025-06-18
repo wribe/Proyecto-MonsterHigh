@@ -59,7 +59,7 @@ public class Vampiro extends Monstruito implements Transformable{
 
     @Override
     public String toString() {
-        return super.toString() + "Vampiro{" +
+        return super.toString() + "Vampiro " +
                 "forma=" + forma +
                 ", nivelEnerxia=" + nivelEnerxia +
                 '}';
