@@ -14,15 +14,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+
         <dependency>
-            <groupId>org.java-sql-generator</groupId>
-            <artifactId>java-sql-generator</artifactId>
-            <version>0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.java-sql-generator</groupId>
-            <artifactId>org.java-sql-generator</artifactId>
-            <version>0.3</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
         </dependency>
     </dependencies>
 

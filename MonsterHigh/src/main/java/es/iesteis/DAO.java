@@ -14,7 +14,7 @@ public class DAO {
     public DAO(String url, String usuario, String password) {
         this.url =  "jdbc:mysql://localhost:3306/MonsterHigh";
         this.usuario =  "root";
-        this.password = "122436"; //password; // casa: 122436 clase: Abc123.
+        this.password = "Abc123."; //password; // casa: 122436 clase: Abc123.
     }
 
     public HashMap<String, HashMap<Integer, String>> devolverEspecies() {
@@ -89,25 +89,26 @@ public class DAO {
         return monstruitos;
     }
 
-    public HashMap<String, Monstruito> devolverMonstruito(boolean colmillos, boolean gafas, boolean zombie){ // cambiarlo por string para decir si/no??
+    public HashMap<String, Monstruito> devolverMonstruito(boolean colmillos, boolean gafas, boolean zombie, String especie){ // cambiarlo por string para decir si/no??
         HashMap<String, Monstruito> monstruitos = new HashMap<>();
-        String sql = "SELECT nombre, habilidadesEspeciais, especie, descipcion, color_piel, color_pelo, colmillos, gafas, alas FROM personajes WHERE tiene_colmillos = ? AND usa_lentes = ? AND es_zombie = ?";
+        String sql = "SELECT m.nombre, m.especie, e.descipcion, m.color_piel, m.color_pelo, m.colmillos, m.gafas, m.alas, zombie FROM monstruito as m join subespecies as e on (m.especie = e.subespecie) WHERE m.colmillos = ? AND m.gafas = ? AND m.zombie = ? and m.especie = ?";
 
         try (Connection conexion = DriverManager.getConnection(url, usuario, password);
              PreparedStatement sentencia = conexion.prepareStatement(sql)){
             sentencia.setBoolean(1, colmillos);
             sentencia.setBoolean(2, gafas);
             sentencia.setBoolean(3, zombie);
+            sentencia.setString(4, especie);
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
                 Monstruito monstruito = new Monstruito(
                         resultado.getString("nombre"),
-                        new Especies(resultado.getString("especie"), resultado.getString("decipcion")),
-                        ColorPiel.valueOf(resultado.getString("color_piel")),
-                        ColorPelo.valueOf(resultado.getString("color_cabello")),
-                        resultado.getBoolean("tiene_colmillos"),
-                        resultado.getBoolean("usa_lentes"),
-                        resultado.getBoolean("tiene_ala")
+                        new Especies(especie, resultado.getString("descipcion")),
+                        ColorPiel.valueOf(resultado.getString("color_piel").toUpperCase()),
+                        ColorPelo.valueOf(resultado.getString("color_pelo").toUpperCase().replace(" ", "_")),
+                        resultado.getBoolean("colmillos"),
+                        resultado.getBoolean("gafas"),
+                        resultado.getBoolean("alas")
                 ) {
                     @Override
                     public void describir() {
@@ -123,37 +124,38 @@ public class DAO {
         return monstruitos;
     }
 
-    public ArrayList<Monstruito> devolverMonstruitoFiltrado(boolean colmillos, boolean gafas, boolean zombie){
+    public ArrayList<Monstruito> devolverMonstruitoFiltrado(boolean colmillos, boolean gafas, boolean zombie, String especie){
         ArrayList<Monstruito> monstruitos = new ArrayList<>();
-        String sql = "SELECT * FROM personajes WHERE tiene_colmillos = ? AND usa_lentes = ? AND es_zombie = ?";
+        String sql = "SELECT m.nombre, m.especie, e.descipcion, m.color_piel, m.color_pelo, m.colmillos, m.gafas, m.alas, zombie FROM monstruito as m join subespecies as e on (m.especie = e.subespecie) WHERE colmillos = ? AND gafas = ? AND zombie = ? and m.especie = ?";
         try (Connection conn = DriverManager.getConnection(url, usuario, password);
              PreparedStatement prs = conn.prepareStatement(sql)) {
 
             prs.setBoolean(1, colmillos);
             prs.setBoolean(2, gafas);
             prs.setBoolean(3, zombie);
+            prs.setString(4, especie);
 
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {
-                String especie = rs.getString("especie");
+                String e = rs.getString("especie");;
                 ColorPiel colorPiel = ColorPiel.valueOf(rs.getString("color_piel").toUpperCase());
-                ColorPelo pelo = ColorPelo.valueOf(rs.getString("color_cabello").toUpperCase().replace(" ", "_"));
+                ColorPelo pelo = ColorPelo.valueOf(rs.getString("color_pelo").toUpperCase().replace(" ", "_"));
 
-                Monstruito m = switch (especie.toLowerCase()) {
-                    case "vampiro" -> new Vampiro(rs.getString("nombre"), new Especies(rs.getString("especie"),rs.getString("descipcion") ), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
-                    case "zombie" -> new Zombie(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
-                    case "licantropo" -> new Licantropo(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
-                    case "monstruo" -> new Monstruo(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
-                    case "ghoul" -> new Ghoul(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
-                    case "momia" -> new Momia(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
-                    case "gorgona" -> new Gorgona(rs.getString("nombre"),new Especies(rs.getString("especie"), rs.getString("descipcion")), colorPiel, pelo,
-                            rs.getBoolean("tiene_colmillos"), rs.getBoolean("usa_lentes"), rs.getBoolean("tiene_ala"));
+                Monstruito m = switch (e.toLowerCase()) {
+                    case "vampiro" -> new Vampiro(rs.getString("nombre"), new Especies(e,rs.getString("descipcion") ), colorPiel, pelo,
+                            rs.getBoolean("colmillos"), rs.getBoolean("gafas"), rs.getBoolean("alas"));
+                    case "zombie" -> new Zombie(rs.getString("nombre"),new Especies(e, rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("colmillos"), rs.getBoolean("gafas"), rs.getBoolean("alas"));
+                    case "licantropo" -> new Licantropo(rs.getString("nombre"),new Especies(e, rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("colmillos"), rs.getBoolean("gafas"), rs.getBoolean("alas"));
+                    case "monstruo" -> new Monstruo(rs.getString("nombre"),new Especies(e, rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("colmillos"), rs.getBoolean("gafas"), rs.getBoolean("alas"));
+                    case "ghoul" -> new Ghoul(rs.getString("nombre"),new Especies(e, rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("colmillos"), rs.getBoolean("gafas"), rs.getBoolean("alas"));
+                    case "momia" -> new Momia(rs.getString("nombre"),new Especies(e, rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("colmillos"), rs.getBoolean("gafas"), rs.getBoolean("alas"));
+                    case "gorgona" -> new Gorgona(rs.getString("nombre"),new Especies(e, rs.getString("descipcion")), colorPiel, pelo,
+                            rs.getBoolean("colmillos"), rs.getBoolean("gafas"), rs.getBoolean("alas"));
                     default -> null;
                 };
 

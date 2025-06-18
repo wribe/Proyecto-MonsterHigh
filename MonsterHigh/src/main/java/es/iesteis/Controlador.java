@@ -10,11 +10,11 @@ public class Controlador {
         this.dao = new DAO("jdbc:mysql://localhost:3306/monster_high", "root", "122436");
     }
 
-    public HashMap<String, Monstruito> buscarMonstruito(boolean colmillos, boolean gafas, boolean zonmbie){
-        return dao.devolverMonstruito(colmillos, gafas, zonmbie);
+    public HashMap<String, Monstruito> buscarMonstruito(boolean colmillos, boolean gafas, boolean zonmbie, String especie){
+        return dao.devolverMonstruito(colmillos, gafas, zonmbie, especie);
     }
 
-    public ArrayList<Monstruito> buscarMonstruitoFiltrado(boolean colmillos, boolean gafas, boolean zonmbie){
-        return dao.devolverMonstruitoFiltrado(colmillos, gafas, zonmbie);
+    public ArrayList<Monstruito> buscarMonstruitoFiltrado(boolean colmillos, boolean gafas, boolean zonmbie, String especie){
+        return dao.devolverMonstruitoFiltrado(colmillos, gafas, zonmbie, especie);
     }
 }

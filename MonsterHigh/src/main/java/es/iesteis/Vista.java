@@ -38,9 +38,11 @@ public class Vista {
             } else {
                 zombie = false;
             }
+            System.out.println("Que especie es tu personaje?");
+            String especie = t.nextLine();
 
-            HashMap<String, Monstruito> monstruitos = controlador.buscarMonstruito(colmillos, gafas, zombie);
-            ArrayList<Monstruito> monstruitos1 = controlador.buscarMonstruitoFiltrado(colmillos, gafas, zombie);
+            HashMap<String, Monstruito> monstruitos = controlador.buscarMonstruito(colmillos, gafas, zombie, especie);
+            ArrayList<Monstruito> monstruitos1 = controlador.buscarMonstruitoFiltrado(colmillos, gafas, zombie, especie);
 
             System.out.println("\nPersonajes posibles:");
             if (monstruitos.isEmpty()) {
@@ -57,9 +59,6 @@ public class Vista {
             }
         } catch (PersonajeNoEncontrado e) {
             System.out.println(e.getMessage());
-        } catch (IllegalArgumentException e){
-            System.out.println("❌ Error en los datos del personaje (verifica nombres o colores en la BD)");
         }
-
     }
 }
